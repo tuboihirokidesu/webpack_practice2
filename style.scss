@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+}
+
+#container {
+  position: relative;
+  background-color: teal;
+  height: 100vh;
+  z-index: 2;
+  transition: all 0.4s;
+}
+.header {
+  height: 100px;
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+  background-color: white;
+}
+.mobile-menu {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  width: 300px;
+
+  &__main {
+    perspective: 3000px;
+    transform-style: preserve-3d;
+    padding: 0;
+  }
+
+  &__item {
+    margin-bottom: 10px;
+    padding: 0 40px;
+    list-style: none;
+    display: block;
+    transition: transform 0.3s, opacity 0.4s;
+    transform: translate3d(0, 0, -1000px);
+    opacity: 0;
+  }
+  &__link {
+    text-decoration: none;
+    color: #333;
+  }
+  &__icon {
+    background-color: unset;
+    border: none;
+    outline: none !important;
+    cursor: pointer;
+  
+    & > span {
+      background-color: black;
+      width: 35px;
+      height: 2px;
+      margin-bottom: 9px;
+      transition: transform 0.7s;
+      display: block;
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+}
+.main-title{
+  font-size: 16px;
+  font-weight: 600;
+}
+.sub-title{
+  display: block;
+  font-weight: 14px;
+  color: #535353;
+}
+
+
+.menu-open {
+  & #container {
+    transform: translateX(-300px) translateY(60px);
+    box-shadow: 0 8px 40px -10px rgba(0, 0, 0, 0.8);
+  }
+
+  & .mobile-menu {
+    &__item{
+      transform: none;
+      opacity: 1;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}){
+          transition-delay: $i*0.07s;
+        }
+        
+      }
+    }
+    &__icon {
+      & > span {
+        background-color: black;
+        &:nth-child(1) {
+          transition-delay: 70ms;
+          transform: translateY(11px) rotate(135deg);
+        }
+        &:nth-child(2) {
+          transform: translateX(-18px) scaleX(0);
+          transition-delay: 0s;
+        }
+        &:nth-child(3) {
+          transition-delay: 140ms;
+          transform: translateY(-11px) rotate(-135deg);
+        }
+      }
+    }
+  }
+}
